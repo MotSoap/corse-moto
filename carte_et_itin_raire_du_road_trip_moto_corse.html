@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Trip Moto Corse - Z650 & CBR650R</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom map styling to fit dark/orange bike theme */
+        .leaflet-container {
+            background: #1e293b;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 sticky top-0 z-[1000] shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 bg-orange-500 text-slate-950 rounded-xl shadow-lg shadow-orange-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                        ROAD TRIP CORSE <span class="text-xs bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded">7-14 AOÛT</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Angoulême ➔ Corse ➔ Z650 & CBR650R Duo Edition</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 text-xs">
+                <div class="flex items-center gap-2 bg-slate-850 px-3 py-1.5 rounded-lg border border-slate-800">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>Kawasaki Z650</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-850 px-3 py-1.5 rounded-lg border border-slate-800">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                    <span>Honda CBR650R</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Map -->
+        <div class="lg:col-span-7 flex flex-col gap-4 min-h-[400px] lg:min-h-0">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden p-2 flex-1 flex flex-col shadow-xl">
+                <!-- Map Actions -->
+                <div class="flex flex-wrap justify-between items-center gap-2 p-3 bg-slate-900/50 rounded-xl mb-2 border border-slate-800/40 text-xs">
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-slate-400 font-medium">Vue active :</span>
+                        <button onclick="focusMap('france')" id="btn-focus-france" class="px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-750 transition font-medium">Continent ➔ Corse</button>
+                        <button onclick="focusMap('corse')" id="btn-focus-corse" class="px-2.5 py-1 rounded bg-orange-500 text-slate-950 font-bold hover:bg-orange-400 transition">Zoom Corse</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleFerryRoute()" class="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-750 transition">
+                            <span id="ferry-status-dot" class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                            <span>Tracés Ferry</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Leaflet Div -->
+                <div id="map" class="flex-1 w-full rounded-xl z-10 min-h-[350px] lg:min-h-[500px]"></div>
+            </div>
+
+            <!-- GPX & Quick Tools -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-orange-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                    EXPORT GPS & ROADBOOKS (.gpx)
+                </h3>
+                <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                    Téléchargez les fichiers d'itinéraire pour votre application de navigation préférée (Liberty Rider, TomTom, Garmin, Calimoto). 
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button onclick="downloadGPX('full')" class="p-2.5 bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-slate-950 font-extrabold rounded-lg text-xs transition shadow-lg shadow-orange-500/10 flex flex-col items-center justify-center gap-1 text-center">
+                        <span>FULL TRIP GPX</span>
+                        <span class="text-[10px] font-medium opacity-80">Angoulême ➔ Corse</span>
+                    </button>
+                    <button onclick="downloadGPX('cap')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
+                        <span class="font-bold">J2: Cap Corse</span>
+                        <span class="text-[10px] text-slate-400">Bastia ➔ St Florent</span>
+                    </button>
+                    <button onclick="downloadGPX('piana')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
+                        <span class="font-bold">J4: Piana</span>
+                        <span class="text-[10px] text-slate-400">Porto ➔ Ajaccio</span>
+                    </button>
+                    <button onclick="downloadGPX('bavella')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
+                        <span class="font-bold">J6: Bavella</span>
+                        <span class="text-[10px] text-slate-400">Bonifacio ➔ Corte</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Info, Tabs, and Actions -->
+        <div class="lg:col-span-5 flex flex-col gap-4">
+            
+            <!-- Tab Selection -->
+            <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+                <button onclick="switchTab('itinerary')" id="tab-itinerary" class="flex-1 py-2 rounded-lg text-center bg-orange-500 text-slate-950 transition-all font-bold">🗺️ Itinéraire</button>
+                <button onclick="switchTab('moto')" id="tab-moto" class="flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all">🏍️ Prépa Motos</button>
+                <button onclick="switchTab('budget')" id="tab-budget" class="flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all">💰 Budget & Check-list</button>
+            </div>
+
+            <!-- TAB CONTENT: ITINERARY -->
+            <div id="content-itinerary" class="flex-col gap-3 flex">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="font-bold text-white text-base">Plan de Route Jour par Jour</h2>
+                        <span class="text-xs text-slate-400 font-medium">Cliquez sur un jour pour voir sur la carte</span>
+                    </div>
+
+                    <!-- Scrollable list of days -->
+                    <div class="flex flex-col gap-2.5 max-h-[500px] overflow-y-auto pr-1">
+                        
+                        <!-- Day 1 -->
+                        <div id="day-card-1" onclick="selectDay(1)" class="p-3 bg-slate-850 border border-orange-500/30 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">VENDREDI 7 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~750 km • (~8h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J1 : Angoulême ➔ Toulon (Ferry)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Traversée du Massif Central, passage sur l'immense Viaduc de Millau. Embarquement ferry de nuit.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">📈 Facile (autoroute/nationale)</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🌉 Viaduc de Millau</span>
+                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Ferry à 19h</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 2 -->
+                        <div id="day-card-2" onclick="selectDay(2)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">SAMEDI 8 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~130 km • (~4h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J2 : Le Cap Corse sauvage</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Débarquement Bastia, tour du Cap Corse dans le sens horaire, pause café Erbalunga et dodo à Saint-Florent.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Intense</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏖️ Plage de Nonza</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🦞 Port de Centuri</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 3 -->
+                        <div id="day-card-3" onclick="selectDay(3)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">DIMANCHE 9 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~150 km • (~4h30)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J3 : Désert des Agriates ➔ Porto</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Route des Agriates (bitume parfait, idéal CBR/Z650), Citadelle de Calvi, puis vertigineuse D81 côtière vers Porto.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Épique</span>
+                                <span class="bg-emerald-950/40 text-emerald-400 border border-emerald-500/10 px-2 py-0.5 rounded">🛣️ Revêtement : Excellent</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏰 Calvi</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 4 -->
+                        <div id="day-card-4" onclick="selectDay(4)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">LUNDI 10 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~100 km • (~3h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J4 : Calanches de Piana ➔ Ajaccio</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Traversée lente du chef-d'œuvre naturel de granit rouge de Piana. Étape plus tranquille pour se reposer.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Moyen</span>
+                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">⚠️ Trafic intense</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Falaises rouges</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 5 -->
+                        <div id="day-card-5" onclick="selectDay(5)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">MARDI 11 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~130 km • (~3h30)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J5 : Ajaccio ➔ Bonifacio</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Route vers le sud de l'île. Arrêt dans la cité perchée de Sartène puis arrivée spectaculaire à Bonifacio.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Moyen</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏰 Cité de Sartène</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛵ Falaises calcaires</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 6 -->
+                        <div id="day-card-6" onclick="selectDay(6)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">MERCREDI 12 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~180 km • (~5h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J6 : L'étape Reine (Bavella ➔ Corte)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Col de Bavella, virages de folie en montagne au milieu des pins et des cochons, puis remontée sur Corte.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Époustouflant</span>
+                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">🐷 Animaux sur la route</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Aiguilles de Bavella</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 7 -->
+                        <div id="day-card-7" onclick="selectDay(7)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">JEUDI 13 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~90 km • (~2h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J7 : Corte ➔ Bastia (Ferry de retour)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Dernier run depuis le centre de la Corse vers Bastia. Visite de Bastia l'après-midi, puis ferry à 20h.</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Léger</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏰 Citadelle de Corte</span>
+                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Ferry à 20h</span>
+                            </div>
+                        </div>
+
+                        <!-- Day 8 -->
+                        <div id="day-card-8" onclick="selectDay(8)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">VENDREDI 14 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~750 km • (~8h)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J8 : Retour Continent ➔ Angoulême</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Débarquement matinal et longue route retour vers la Charente. Fin du voyage fatigués mais les yeux pleins d'images !</p>
+                            <div class="flex flex-wrap gap-2 text-[10px]">
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">📈 Facile (Transit)</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏡 Retour maison</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: MOTO PREP -->
+            <div id="content-moto" class="hidden flex-col gap-4">
+                <!-- Z650 vs CBR650R settings -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+                        🔧 Réglages Motos & Pilotage
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Z650 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-emerald-500/20">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                <h4 class="font-bold text-white text-sm">Kawasaki Z650</h4>
+                            </div>
+                            <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
+                                <li><strong>Pression pneus :</strong> 2.2 bar (AV) / 2.4 bar (AR) chargé.</li>
+                                <li><strong>Suspension :</strong> Augmenter la précharge de l'amortisseur arrière d'un ou deux crans si vous mettez un sac de selle lourd.</li>
+                                <li><strong>Moteur :</strong> Son bicylindre coupleux est royal pour s'extraire des virages serrés corse en 2ème et 3ème.</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- CBR650R -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-red-500/20">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <h4 class="font-bold text-white text-sm">Honda CBR650R</h4>
+                            </div>
+                            <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
+                                <li><strong>Pression pneus :</strong> 2.3 bar (AV) / 2.5 bar (AR).</li>
+                                <li><strong>Position de conduite :</strong> Les demi-guidons sollicitent les poignets à basse vitesse. Relâchez le haut du corps et serrez le réservoir avec vos genoux.</li>
+                                <li><strong>Moteur :</strong> Le 4 cylindres adore chanter, mais en montagne il faudra tricoter du sélecteur pour rester dans les tours.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- General motorcycle rules -->
+                    <div class="mt-4 p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-xl">
+                        <h4 class="font-bold text-amber-400 text-xs mb-2 flex items-center gap-1.5">
+                            ⚠️ RÈGLES DE SURVIE À MOTO EN CORSE
+                        </h4>
+                        <ul class="text-xs text-slate-300 space-y-1.5 list-decimal pl-4 leading-relaxed">
+                            <li><strong>Pas de trajectoire extérieure :</strong> Les locaux et camping-cars coupent parfois le milieu des virages serrés. Restez sagement de votre côté de la ligne imaginaire.</li>
+                            <li><strong>La faune locale :</strong> Vaches sauvages, sangliers, cochons sauvages et chèvres vivent en liberté. Un cochon noir est invisible dans l'ombre du maquis. Prudence maximale en forêt !</li>
+                            <li><strong>Les routes glissantes :</strong> En août, la poussière et la chaleur rendent le bitume glissant si une averse survient (le maquis "transpire").</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CONTENT: BUDGET & CHECKLIST -->
+            <div id="content-budget" class="hidden flex-col gap-4">
+                <!-- Budget -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+                        💰 Estimation du Budget (Pour 2 Motos / 2 Personnes)
+                    </h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1.5 border-b border-slate-800">
+                            <span class="text-slate-400">Ferry Aller-Retour (2 motos + cabine)</span>
+                            <span class="font-bold text-white">~350 €</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-slate-800">
+                            <span class="text-slate-400">Essence (approx. 2 500 km cumulés par moto)</span>
+                            <span class="font-bold text-white">~300 € / moto</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-slate-800">
+                            <span class="text-slate-400">Hébergement (5 nuits en Corse - hors ferry)</span>
+                            <span class="font-bold text-white">~450 €</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-slate-800">
+                            <span class="text-slate-400">Péages d'autoroute (Angoulême-Toulon A/R)</span>
+                            <span class="font-bold text-white">~60 €</span>
+                        </div>
+                        <div class="flex justify-between py-2 text-sm font-bold text-orange-400">
+                            <span>TOTAL ESTIMÉ (Hors repas)</span>
+                            <span>~1 460 € (soit 730 €/pers)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bag Packing Checklist -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
+                        🧳 La Checklist du Bagage Moto Réduit
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-3 leading-relaxed">
+                        Sur la Z650 et la CBR650R, le volume est limité. Prenez le strict minimum !
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="space-y-1.5">
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" checked class="accent-orange-500 rounded">
+                                <span>Bombe de graisse de chaîne (à passer tous les soirs)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" checked class="accent-orange-500 rounded">
+                                <span>Kit de réparation crevaison (mèches + CO2)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" class="accent-orange-500 rounded">
+                                <span>Sangles en rab + chiffons (protection ferry)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" class="accent-orange-500 rounded">
+                                <span>Double des clés de chaque moto</span>
+                            </label>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" checked class="accent-orange-500 rounded">
+                                <span>Tenue moto été (mesh) + vêtement de pluie</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" class="accent-orange-500 rounded">
+                                <span>Gourde isotherme (indispensable en août !)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" class="accent-orange-500 rounded">
+                                <span>Plaquette béquille latérale (anti-enfoncement)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+                                <input type="checkbox" class="accent-orange-500 rounded">
+                                <span>Maillot de bain (pause rapide calanques !)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-4 px-6 mt-6 text-center text-xs text-slate-400">
+        <p>© 2026 Corse Moto Road Trip Tracker - Conçu pour motards passionnés d'asphalte et de grands espaces.</p>
+    </footer>
+
+    <!-- JS Logic for Map & interactions -->
+    <script>
+        // Init Map
+        const map = L.map('map').setView([42.5, 9.1], 8);
+
+        // Dark map layer (CartoDB Dark Matter)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Custom markers styles
+        const markerStyle = `
+            background-color: #f97316;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+        `;
+
+        const startMarkerStyle = `
+            background-color: #10b981;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
+        `;
+
+        // Itineraries Data Coordinates
+        const routeCoordinates = {
+            1: [ // Angoulême to Toulon
+                [45.6484, 0.1562], // Angoulême
+                [45.8336, 1.2611], // Limoges
+                [44.0984, 3.0780], // Millau
+                [43.6108, 3.8767], // Montpellier
+                [43.1242, 5.9280]  // Toulon
+            ],
+            2: [ // Bastia to St Florent (Cap Corse)
+                [42.7028, 9.4509], // Bastia
+                [42.7745, 9.4793], // Erbalunga
+                [42.9587, 9.4518], // Macinaggio
+                [42.9649, 9.3512], // Centuri
+                [42.7844, 9.3453], // Nonza
+                [42.6806, 9.3039]  // Saint-Florent
+            ],
+            3: [ // Saint-Florent to Porto
+                [42.6806, 9.3039], // Saint-Florent
+                [42.6596, 9.2131], // Agriates
+                [42.6341, 8.9372], // Île Rousse
+                [42.5645, 8.7573], // Calvi
+                [42.4101, 8.6477], // Galéria
+                [42.2612, 8.6946]  // Porto
+            ],
+            4: [ // Porto to Ajaccio
+                [42.2612, 8.6946], // Porto
+                [42.2476, 8.6253], // Calanches
+                [42.2384, 8.6366], // Piana
+                [42.1332, 8.5947], // Cargèse
+                [41.9272, 8.7381]  // Ajaccio
+            ],
+            5: [ // Ajaccio to Bonifacio
+                [41.9272, 8.7381], // Ajaccio
+                [41.6749, 8.9038], // Propriano
+                [41.6210, 8.9723], // Sartène
+                [41.4981, 9.0345], // Roccapina
+                [41.3874, 9.1585]  // Bonifacio
+            ],
+            6: [ // Bonifacio to Corte (Bavella)
+                [41.3874, 9.1585], // Bonifacio
+                [41.5910, 9.2796], // Porto-Vecchio
+                [41.7497, 9.1706], // Zonza
+                [41.7958, 9.2250], // Aiguilles de Bavella
+                [41.8569, 9.3986], // Solenzara
+                [42.3056, 9.1508]  // Corte
+            ],
+            7: [ // Corte to Bastia
+                [42.3056, 9.1508], // Corte
+                [42.4635, 9.2062], // Ponte Leccia
+                [42.7028, 9.4509]  // Bastia
+            ],
+            8: [ // Toulon to Angoulême
+                [43.1242, 5.9280], // Toulon
+                [43.6108, 3.8767], // Montpellier
+                [44.0984, 3.0780], // Millau
+                [45.8336, 1.2611], // Limoges
+                [45.6484, 0.1562]  // Angoulême
+            ]
+        };
+
+        const ferryRoutes = [
+            [[43.1242, 5.9280], [42.7028, 9.4509]], // J1 Ferry (Toulon -> Bastia)
+            [[42.7028, 9.4509], [43.1242, 5.9280]]  // J7 Ferry (Bastia -> Toulon)
+        ];
+
+        // Store all maps visual elements
+        let polylines = {};
+        let markers = [];
+        let ferryPolylines = [];
+        let activeDay = 1;
+        let ferryVisible = true;
+
+        // Draw ferry routes (dashed blue lines)
+        function drawFerry() {
+            ferryRoutes.forEach(route => {
+                const fLine = L.polyline(route, {
+                    color: '#3b82f6',
+                    dashArray: '10, 10',
+                    weight: 3,
+                    opacity: 0.8
+                }).addTo(map);
+                ferryPolylines.push(fLine);
+            });
+        }
+
+        // Draw Itinerary Lines & Stop Markers
+        function drawRoutes() {
+            // Colors for days
+            const colors = {
+                1: '#475569', // Dark grey for continental road
+                2: '#f97316', // Orange for Corse steps
+                3: '#f97316',
+                4: '#f97316',
+                5: '#f97316',
+                6: '#f97316',
+                7: '#f97316',
+                8: '#475569'
+            };
+
+            for (let day in routeCoordinates) {
+                const dayCoords = routeCoordinates[day];
+                const line = L.polyline(dayCoords, {
+                    color: colors[day],
+                    weight: day == activeDay ? 6 : 3,
+                    opacity: day == activeDay ? 0.9 : 0.4
+                }).addTo(map);
+
+                polylines[day] = line;
+
+                // Add unique marker for the start/finish of each road segment
+                dayCoords.forEach((coord, index) => {
+                    let style = markerStyle;
+                    let tooltipText = `Étape du parcours`;
+                    
+                    if (index === 0 && day == 1) {
+                        style = startMarkerStyle;
+                        tooltipText = `<strong>DÉPART : Angoulême</strong>`;
+                    } else if (index === dayCoords.length - 1 && day == 8) {
+                        style = startMarkerStyle;
+                        tooltipText = `<strong>ARRIVÉE : Angoulême</strong>`;
+                    } else if (index === 0) {
+                        tooltipText = `<strong>Début Étape Jour ${day}</strong>`;
+                    } else if (index === dayCoords.length - 1) {
+                        tooltipText = `<strong>Fin Étape Jour ${day}</strong>`;
+                    }
+
+                    const myIcon = L.divIcon({
+                        html: `<div style="${style}"></div>`,
+                        className: 'custom-div-icon',
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8]
+                    });
+
+                    const marker = L.marker(coord, { icon: myIcon }).addTo(map);
+                    marker.bindTooltip(tooltipText);
+                    markers.push(marker);
+                });
+            }
+        }
+
+        // Setup views & zooms
+        function focusMap(area) {
+            const btnFrance = document.getElementById('btn-focus-france');
+            const btnCorse = document.getElementById('btn-focus-corse');
+
+            if (area === 'france') {
+                map.flyTo([43.7, 4.5], 6);
+                btnFrance.classList.add('bg-orange-500', 'text-slate-950', 'font-bold');
+                btnFrance.classList.remove('bg-slate-800', 'text-slate-300');
+                btnCorse.classList.remove('bg-orange-500', 'text-slate-950', 'font-bold');
+                btnCorse.classList.add('bg-slate-800', 'text-slate-300');
+            } else {
+                map.flyTo([42.3, 9.1], 8.5);
+                btnCorse.classList.add('bg-orange-500', 'text-slate-950', 'font-bold');
+                btnCorse.classList.remove('bg-slate-800', 'text-slate-300');
+                btnFrance.classList.remove('bg-orange-500', 'text-slate-950', 'font-bold');
+                btnFrance.classList.add('bg-slate-800', 'text-slate-300');
+            }
+        }
+
+        function toggleFerryRoute() {
+            ferryVisible = !ferryVisible;
+            const dot = document.getElementById('ferry-status-dot');
+            if (ferryVisible) {
+                ferryPolylines.forEach(p => map.addLayer(p));
+                dot.classList.replace('bg-slate-500', 'bg-blue-400');
+            } else {
+                ferryPolylines.forEach(p => map.removeLayer(p));
+                dot.classList.replace('bg-blue-400', 'bg-slate-500');
+            }
+        }
+
+        // Select active day itinerary highlight
+        function selectDay(dayNum) {
+            activeDay = dayNum;
+            
+            // Highlight list visual class
+            for (let i = 1; i <= 8; i++) {
+                const card = document.getElementById(`day-card-${i}`);
+                if (i === dayNum) {
+                    card.classList.replace('bg-slate-900', 'bg-slate-850');
+                    card.classList.replace('border-slate-800', 'border-orange-500/30');
+                } else {
+                    card.classList.replace('bg-slate-850', 'bg-slate-900');
+                    card.classList.replace('border-orange-500/30', 'border-slate-800');
+                }
+            }
+
+            // Update Polylines weights
+            for (let day in polylines) {
+                if (day == dayNum) {
+                    polylines[day].setStyle({ weight: 6, opacity: 0.9, color: '#f97316' });
+                } else {
+                    const defaultColor = (day == 1 || day == 8) ? '#475569' : '#e2e8f0';
+                    polylines[day].setStyle({ weight: 3, opacity: 0.3, color: defaultColor });
+                }
+            }
+
+            // Smart camera flyTo according to day selected
+            if (dayNum === 1 || dayNum === 8) {
+                focusMap('france');
+            } else {
+                // Focus on Corsica
+                focusMap('corse');
+                // Fit specific bounds of the day
+                map.fitBounds(polylines[dayNum].getBounds(), { padding: [40, 40] });
+            }
+        }
+
+        // Tab Switch logic
+        function switchTab(tabId) {
+            const tabs = ['itinerary', 'moto', 'budget'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const content = document.getElementById(`content-${t}`);
+                if (t === tabId) {
+                    btn.className = "flex-1 py-2 rounded-lg text-center bg-orange-500 text-slate-950 font-bold transition-all shadow-md";
+                    content.classList.remove('hidden');
+                    content.classList.add('flex');
+                } else {
+                    btn.className = "flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all";
+                    content.classList.add('hidden');
+                    content.classList.remove('flex');
+                }
+            });
+        }
+
+        // Mock GPX Generator / Downloader
+        function downloadGPX(type) {
+            let gpxContent = `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="CorseMotoTrip">\n`;
+            
+            if (type === 'full') {
+                gpxContent += `  <trk>\n    <name>Corse Road Trip Complet J1-J8</name>\n    <trkseg>\n`;
+                for (let day in routeCoordinates) {
+                    routeCoordinates[day].forEach(coord => {
+                        gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
+                    });
+                }
+                gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
+            } else if (type === 'cap') {
+                gpxContent += `  <trk>\n    <name>J2 - Cap Corse Sauvage</name>\n    <trkseg>\n`;
+                routeCoordinates[2].forEach(coord => {
+                    gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
+                });
+                gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
+            } else if (type === 'piana') {
+                gpxContent += `  <trk>\n    <name>J4 - Calanches de Piana</name>\n    <trkseg>\n`;
+                routeCoordinates[4].forEach(coord => {
+                    gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
+                });
+                gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
+            } else if (type === 'bavella') {
+                gpxContent += `  <trk>\n    <name>J6 - Bavella Reine</name>\n    <trkseg>\n`;
+                routeCoordinates[6].forEach(coord => {
+                    gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
+                });
+                gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
+            }
+
+            const blob = new Blob([gpxContent], { type: 'application/gpx+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `roadtrip_corse_${type}.gpx`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialization
+        window.onload = function() {
+            drawRoutes();
+            drawFerry();
+            // Default select Day 2 to show the Corsica loops
+            selectDay(2);
+        };
+    </script>
+</body>
+</html>
