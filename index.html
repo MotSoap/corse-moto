@@ -50,7 +50,7 @@
                     <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
                         ROAD TRIP CORSE <span class="text-xs bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded">7-14 AOÛT</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Nice ➔ Île-Rousse / Bastia ➔ Savone (Italie) • Z650 & CBR650R</p>
+                    <p class="text-xs text-slate-400">Nice ➔ Île-Rousse (16h30) / Bastia ➔ Savone (14h30) • Z650 & CBR650R</p>
                 </div>
             </div>
             
@@ -138,8 +138,8 @@
             <div id="content-itinerary" class="flex-col gap-3 flex">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
                     <div class="flex justify-between items-center mb-3">
-                        <h2 class="font-bold text-white text-base">Plan de Route Mis à Jour</h2>
-                        <span class="text-xs text-slate-400 font-medium">Cliquez pour voir sur la carte</span>
+                        <h2 class="font-bold text-white text-base">Plan de Route & Hébergements</h2>
+                        <span class="text-xs text-slate-400 font-medium">Sélectionnez une étape</span>
                     </div>
 
                     <!-- Scrollable list of days -->
@@ -149,14 +149,19 @@
                         <div id="day-card-1" onclick="selectDay(1)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
                             <div class="flex justify-between items-start mb-1.5">
                                 <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">VEN 7 AOÛT</span>
-                                <span class="text-xs text-slate-300 font-bold">~830 km • (~8h30)</span>
+                                <span class="text-xs text-slate-300 font-bold">~830 km • (~8h30 de route)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J1 : Angoulême ➔ Nice (Ferry)</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Départ aux aurores d'Angoulême. Traversée du sud de la France jusqu'au port de Nice. Embarquement ferry de nuit.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">📈 Liaison Autoroutière</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🌅 Promenade des Anglais</span>
-                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Ferry Nice ➔ Île-Rousse</span>
+                            <h4 class="text-sm font-bold text-white mb-1">J1 : Angoulême ➔ Nice ➔ Île-Rousse (Ferry)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                <strong class="text-amber-400">⚠️ Attention timing serré !</strong> Départ d'Angoulême à <strong class="text-white">5h30 max</strong>. Arrivée à Nice vers 14h30/15h00 pour l'enregistrement. Ferry à <strong class="text-white">16h30</strong>, traversée de jour de 5h. Débarquement à Île-Rousse à <strong class="text-white">21h30</strong>.
+                            </p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Île-Rousse :</span>
+                                <p class="text-slate-300"><strong>Hôtel Isola</strong> ou <strong>Hôtel Splendid</strong>. Proches du port pour un accès direct à 21h30, avec parkings sécurisés parfaits pour la Z650 et la CBR650R.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
+                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Nice ➔ Île-Rousse (16h30-21h30)</span>
                             </div>
                         </div>
 
@@ -167,11 +172,15 @@
                                 <span class="text-xs text-slate-300 font-bold">~165 km • (~4h30)</span>
                             </div>
                             <h4 class="text-sm font-bold text-white mb-1">J2 : Île-Rousse ➔ Cap Corse ➔ St-Florent</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Débarquement en Balagne à Île-Rousse. On pose les bagages lourds et on s'offre le mythique Cap Corse en mode léger ! Dodo à Saint-Florent.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Réveil tranquille après la fatigue de la veille. On s'offre le mythique Cap Corse. <strong class="text-emerald-400">Astuce :</strong> déposez d'abord vos bagages à votre hôtel à St-Florent pour rouler léger et profiter des virages à fond !</p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à St-Florent / Bastia :</span>
+                                <p class="text-slate-300"><strong>Adonis Saint-Florent</strong> (résidence calme) ou <strong>Sud Hôtel</strong> à Bastia (excellent rapport qualité/prix, très motard-friendly avec garage fermé).</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
                                 <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Intense</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏖️ Cap Corse Allégé</span>
-                                <span class="bg-emerald-950/40 text-emerald-400 border border-emerald-500/10 px-2 py-0.5 rounded">🛎️ Nuit à St-Florent</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏍️ Cap Corse Allégé</span>
                             </div>
                         </div>
 
@@ -182,11 +191,15 @@
                                 <span class="text-xs text-slate-300 font-bold">~150 km • (~4h30)</span>
                             </div>
                             <h4 class="text-sm font-bold text-white mb-1">J3 : Désert des Agriates ➔ Porto</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Courbes magiques des Agriates (bitume parfait), visite de Calvi et descente sinueuse vers le golfe sauvage de Porto.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Courbes parfaites des Agriates, arrêt pique-nique à la Citadelle de Calvi, puis la magnifique et sauvage D81 côtière jusqu'au golfe de Porto.</p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Porto-Ota :</span>
+                                <p class="text-slate-300"><strong>Hôtel Le Belvédère</strong> ou <strong>Hôtel Le Bon Accueil</strong>. Très abordables, calmes et offrant des vues superbes sur le golfe avec parkings sécurisés.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
                                 <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Épique</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🛣️ D81 Côtière</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏰 Citadelle Calvi</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🌅 Coucher de soleil à Porto</span>
                             </div>
                         </div>
 
@@ -197,11 +210,15 @@
                                 <span class="text-xs text-slate-300 font-bold">~100 km • (~3h)</span>
                             </div>
                             <h4 class="text-sm font-bold text-white mb-1">J4 : Calanches de Piana ➔ Ajaccio</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Les majestueux monolithes de granite rouge de Piana. Étape plus tranquille pour économiser les forces physiques.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Traversée lente et émerveillée des Calanches de Piana (granit rouge). Étape courte idéale pour flâner à la plage et économiser les bras.</p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Ajaccio / Porticcio :</span>
+                                <p class="text-slate-300"><strong>Hôtel Ibis Budget Ajaccio</strong>. Situé en périphérie, très économique avec un grand parking vidéo-surveillé idéal pour rassurer les motards.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
                                 <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Moyen</span>
-                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">⚠️ Tourisme intense</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Falaises Rouges</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Piana</span>
                             </div>
                         </div>
 
@@ -212,11 +229,14 @@
                                 <span class="text-xs text-slate-300 font-bold">~130 km • (~3h30)</span>
                             </div>
                             <h4 class="text-sm font-bold text-white mb-1">J5 : Ajaccio ➔ Bonifacio</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Halte dans la très authentique cité de Sartène, passage devant le Lion de Roccapina, et arrivée sur les hautes falaises de Bonifacio.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Moyen</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏰 Sartène</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛵ Falaises calcaires</span>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Route vers l'extrême sud. Arrêt déjeuner dans la magnifique ville de Sartène, puis découverte des vertigineuses falaises calcaires de Bonifacio.</p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir (Éviter les prix de Bonifacio) :</span>
+                                <p class="text-slate-300"><strong>Hôtel L'Escale</strong> (Sartène/Propriano) ou un petit gîte vers <strong>Figari / Pianottoli</strong>. Beaucoup moins cher et parfait pour le calme.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛵ Bonifacio</span>
                             </div>
                         </div>
 
@@ -226,26 +246,36 @@
                                 <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">MER 12 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~180 km • (~5h)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J6 : L'étape Reine (Bavella ➔ Corte)</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Col de Bavella, aiguilles rocheuses majestueuses, descente sauvage et remontée vers la capitale historique, Corte.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Époustouflant</span>
-                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">🐷 Animaux sur chaussée</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Col de Bavella</span>
+                            <h4 class="text-sm font-bold text-white mb-1">J6 : Bavella ➔ Solenzara ➔ Corte</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">L'étape reine de montagne ! Forêt de l'Ospedale, les mythiques aiguilles de Bavella, puis vous plongez vers Solenzara pour remonter vers Corte.</p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Corte :</span>
+                                <p class="text-slate-300"><strong>Hôtel HR</strong> ou <strong>Hôtel Duc de Padoue</strong>. Situés au coeur de la capitale historique, calmes, confortables et abordables en moyenne montagne.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
+                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Intense</span>
+                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">🐷 Cochons sauvages</span>
                             </div>
                         </div>
 
                         <!-- Day 7 -->
                         <div id="day-card-7" onclick="selectDay(7)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
                             <div class="flex justify-between items-start mb-1.5">
-                                <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">JEU 13 AOÛT</span>
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">JEU 13 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~90 km • (~2h)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J7 : Corte ➔ Bastia (Ferry retour)</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Dernier run tranquille vers Bastia. Visite du vieux port l'après-midi puis embarquement pour l'Italie.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Léger</span>
-                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Ferry Bastia ➔ Savone (Italie)</span>
+                            <h4 class="text-sm font-bold text-white mb-1">J7 : Corte ➔ Bastia ➔ Savone (Ferry retour)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                <strong class="text-amber-400">⚠️ Attention horaire ferry !</strong> Départ du port de Bastia à <strong class="text-white">14h30</strong>. Vous devez quitter Corte vers 10h00 pour arriver tranquillement vers 12h00 à Bastia. Embarquement et traversée de 6h30. Arrivée en Italie à Savone à <strong class="text-white">21h00</strong>.
+                            </p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir près de Savone (Italie) :</span>
+                                <p class="text-slate-300"><strong>Idea Hotel Plus Savona</strong> ou un petit hôtel/B&B proche de l'autoroute à Savone. <strong class="text-amber-400">Indispensable :</strong> bien dormir pour affronter la très longue journée du lendemain.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
+                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Bastia ➔ Savone (14h30-21h00)</span>
                             </div>
                         </div>
 
@@ -255,12 +285,13 @@
                                 <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded">VEN 14 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~900 km • (~9h30)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J8 : Savone ➔ Angoulême (Le Marathon)</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Débarquement en Italie, passage par la magnifique côte d'Azur, puis longue traversée d'Est en Ouest pour rentrer en Charente.</p>
-                            <div class="flex flex-wrap gap-2 text-[10px]">
+                            <h4 class="text-sm font-bold text-white mb-1">J8 : Savone (Italie) ➔ Angoulême</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Le grand marathon retour sur autoroute. Partez tôt après un bon petit-déjeuner. Pensez à faire des pauses régulières pour soulager les poignets sur la CBR650R et le cou sur la Z650.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
                                 <span class="bg-red-950/50 text-red-400 border border-red-500/20 px-2 py-0.5 rounded">⚠️ Très long trajet</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🇮🇹 Frontière Italienne</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏍️ Relais réguliers requis</span>
+                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏡 Retour Charente</span>
                             </div>
                         </div>
 
@@ -334,8 +365,8 @@
                             <span class="font-bold text-white">~330 € / moto</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
-                            <span class="text-slate-400">Hébergement (5 nuits en Corse - hors ferry)</span>
-                            <span class="font-bold text-white">~450 €</span>
+                            <span class="text-slate-400">Hébergement (6 nuits - 5 en Corse + 1 en Italie - hors ferry)</span>
+                            <span class="font-bold text-white">~530 €</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
                             <span class="text-slate-400">Péages d'autoroute (Angoulême-Nice + Savone-Angoulême)</span>
@@ -343,7 +374,7 @@
                         </div>
                         <div class="flex justify-between py-2 text-sm font-bold text-orange-400">
                             <span>TOTAL ESTIMÉ (Hors repas)</span>
-                            <span>~1 660 € (soit 830 €/pers)</span>
+                            <span>~1 740 € (soit 870 €/pers)</span>
                         </div>
                     </div>
                 </div>
