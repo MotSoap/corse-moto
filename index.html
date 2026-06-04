@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Road Trip Moto Corse - Z650 & CBR650R</title>
+    <title>Road Trip Moto Corse - Z650 & CBR650R (Mis à jour)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Leaflet CSS -->
@@ -48,20 +48,20 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-                        ROAD TRIP CORSE <span class="text-xs bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded">7-14 AOÛT</span>
+                        ROAD TRIP CORSE <span class="text-xs bg-orange-500/10 text-orange-400 border border-orange-500/20 px-2 py-0.5 rounded">7-15 AOÛT</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Nice ➔ Île-Rousse (16h30) / Bastia ➔ Savone (14h30) • Z650 & CBR650R</p>
+                    <p class="text-xs text-slate-400">Nice ➔ Île-Rousse (7/08) | Bastia ➔ Savone (14/08) • Z650 & CBR650R</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-4 text-xs">
                 <div class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-750">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Kawasaki Z650</span>
+                    <span>Z650</span>
                 </div>
                 <div class="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-750">
                     <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-                    <span>Honda CBR650R</span>
+                    <span>CBR650R</span>
                 </div>
             </div>
         </div>
@@ -101,23 +101,23 @@
                     EXPORT GPS & ROADBOOKS (.gpx)
                 </h3>
                 <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-                    Téléchargez les fichiers d'itinéraire mis à jour pour votre application GPS moto (Liberty Rider, TomTom, Garmin, Calimoto).
+                    Téléchargez les fichiers d'itinéraire mis à jour pour vos GPS ou smartphones.
                 </p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     <button onclick="downloadGPX('full')" class="p-2.5 bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-slate-950 font-extrabold rounded-lg text-xs transition shadow-lg shadow-orange-500/10 flex flex-col items-center justify-center gap-1 text-center">
                         <span>TRIP COMPLET GPX</span>
-                        <span class="text-[10px] font-medium opacity-80">Nice ➔ Corse ➔ Savone</span>
+                        <span class="text-[10px] font-medium opacity-80">J1 à J9 Complet</span>
                     </button>
                     <button onclick="downloadGPX('cap')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
-                        <span class="font-bold">J2: Cap Corse Loop</span>
+                        <span class="font-bold">J2: Cap Corse</span>
                         <span class="text-[10px] text-slate-400">Île-Rousse ➔ St Florent</span>
                     </button>
-                    <button onclick="downloadGPX('piana')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
-                        <span class="font-bold">J4: Piana</span>
-                        <span class="text-[10px] text-slate-400">Porto ➔ Ajaccio</span>
+                    <button onclick="downloadGPX('castagniccia')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
+                        <span class="font-bold">J7: Castagniccia</span>
+                        <span class="text-[10px] text-slate-400">Boucle sauvage</span>
                     </button>
                     <button onclick="downloadGPX('return')" class="p-2.5 bg-slate-800 hover:bg-slate-750 text-slate-200 rounded-lg text-xs transition flex flex-col items-center justify-center gap-1 text-center">
-                        <span class="font-bold">J8: Le Grand Retour</span>
+                        <span class="font-bold">J9: Le Retour</span>
                         <span class="text-[10px] text-slate-400">Savone ➔ Angoulême</span>
                     </button>
                 </div>
@@ -131,14 +131,14 @@
             <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
                 <button onclick="switchTab('itinerary')" id="tab-itinerary" class="flex-1 py-2 rounded-lg text-center bg-orange-500 text-slate-950 transition-all font-bold">🗺️ Itinéraire</button>
                 <button onclick="switchTab('moto')" id="tab-moto" class="flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all">🏍️ Prépa Motos</button>
-                <button onclick="switchTab('budget')" id="tab-budget" class="flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all">💰 Budget & Checklist</button>
+                <button onclick="switchTab('budget')" id="tab-budget" class="flex-1 py-2 rounded-lg text-center text-slate-400 hover:text-slate-200 transition-all font-bold">💰 Budget & Checklist</button>
             </div>
 
             <!-- TAB CONTENT: ITINERARY -->
             <div id="content-itinerary" class="flex-col gap-3 flex">
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
                     <div class="flex justify-between items-center mb-3">
-                        <h2 class="font-bold text-white text-base">Plan de Route & Hébergements</h2>
+                        <h2 class="font-bold text-white text-base">Plan de Route Révisé (7 - 15 Août)</h2>
                         <span class="text-xs text-slate-400 font-medium">Sélectionnez une étape</span>
                     </div>
 
@@ -149,19 +149,16 @@
                         <div id="day-card-1" onclick="selectDay(1)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
                             <div class="flex justify-between items-start mb-1.5">
                                 <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">VEN 7 AOÛT</span>
-                                <span class="text-xs text-slate-300 font-bold">~830 km • (~8h30 de route)</span>
+                                <span class="text-xs text-slate-300 font-bold">~830 km • (~8h30)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J1 : Angoulême ➔ Nice ➔ Île-Rousse (Ferry)</h4>
+                            <h4 class="text-sm font-bold text-white mb-1">J1 : Angoulême ➔ Nice ➔ Île-Rousse</h4>
                             <p class="text-xs text-slate-400 mb-2 leading-relaxed">
-                                <strong class="text-amber-400">⚠️ Attention timing serré !</strong> Départ d'Angoulême à <strong class="text-white">5h30 max</strong>. Arrivée à Nice vers 14h30/15h00 pour l'enregistrement. Ferry à <strong class="text-white">16h30</strong>, traversée de jour de 5h. Débarquement à Île-Rousse à <strong class="text-white">21h30</strong>.
+                                <strong class="text-amber-400">⚠️ Timing ultra-serré :</strong> Départ d'Angoulême à <strong class="text-white">5h30 max</strong>. Arrivée au port de Nice vers 14h30/15h pour l'embarquement. Ferry à <strong class="text-white">16h30</strong>, traversée de jour de 5h max. Débarquement à Île-Rousse à <strong class="text-white">21h30</strong>.
                             </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
                                 <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Île-Rousse :</span>
-                                <p class="text-slate-300"><strong>Hôtel Isola</strong> ou <strong>Hôtel Splendid</strong>. Proches du port pour un accès direct à 21h30, avec parkings sécurisés parfaits pour la Z650 et la CBR650R.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Nice ➔ Île-Rousse (16h30-21h30)</span>
+                                <p class="text-slate-300"><strong>Hôtel Isola</strong> ou <strong>Hôtel Splendid</strong>. Très proches du port pour un dodo direct et rapide après le débarquement nocturne. Parkings fermés pour les motos.</p>
                             </div>
                         </div>
 
@@ -171,16 +168,14 @@
                                 <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">SAM 8 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~165 km • (~4h30)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J2 : Île-Rousse ➔ Cap Corse ➔ St-Florent</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Réveil tranquille après la fatigue de la veille. On s'offre le mythique Cap Corse. <strong class="text-emerald-400">Astuce :</strong> déposez d'abord vos bagages à votre hôtel à St-Florent pour rouler léger et profiter des virages à fond !</p>
+                            <h4 class="text-sm font-bold text-white mb-1">J2 : Le Grand Tour du Cap Corse</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Réveil à Île-Rousse. Roulez jusqu'à votre hôtel de Saint-Florent pour y <strong class="text-emerald-400">déposer tous vos bagages</strong>. Vous partez ensuite faire le Cap Corse en mode léger. Vos Z650 et CBR650R seront des vélos dans les enfilades de Nonza et Centuri !
+                            </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
-                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à St-Florent / Bastia :</span>
-                                <p class="text-slate-300"><strong>Adonis Saint-Florent</strong> (résidence calme) ou <strong>Sud Hôtel</strong> à Bastia (excellent rapport qualité/prix, très motard-friendly avec garage fermé).</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Intense</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏍️ Cap Corse Allégé</span>
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Saint-Florent / Bastia :</span>
+                                <p class="text-slate-300"><strong>Adonis Saint-Florent</strong> (calme, piscine) ou le <strong>Sud Hôtel</strong> à Bastia (référence motard, garage fermé pour les motos).</p>
                             </div>
                         </div>
 
@@ -191,15 +186,13 @@
                                 <span class="text-xs text-slate-300 font-bold">~150 km • (~4h30)</span>
                             </div>
                             <h4 class="text-sm font-bold text-white mb-1">J3 : Désert des Agriates ➔ Porto</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Courbes parfaites des Agriates, arrêt pique-nique à la Citadelle de Calvi, puis la magnifique et sauvage D81 côtière jusqu'au golfe de Porto.</p>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Traversée des Agriates (bitume parfait, courbes idéales). Pause à la citadelle de Calvi, puis l'incroyable descente côtière vers Porto par la D81.
+                            </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
                                 <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Porto-Ota :</span>
-                                <p class="text-slate-300"><strong>Hôtel Le Belvédère</strong> ou <strong>Hôtel Le Bon Accueil</strong>. Très abordables, calmes et offrant des vues superbes sur le golfe avec parkings sécurisés.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Épique</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🌅 Coucher de soleil à Porto</span>
+                                <p class="text-slate-300"><strong>Hôtel Le Belvédère</strong> ou <strong>Hôtel Le Bon Accueil</strong>. Très abordables, chambres confortables pour un sommeil réparateur au cœur du golfe.</p>
                             </div>
                         </div>
 
@@ -209,16 +202,14 @@
                                 <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">LUN 10 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~100 km • (~3h)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J4 : Calanches de Piana ➔ Ajaccio</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Traversée lente et émerveillée des Calanches de Piana (granit rouge). Étape courte idéale pour flâner à la plage et économiser les bras.</p>
+                            <h4 class="text-sm font-bold text-white mb-1">J4 : Les Calanches de Piana ➔ Ajaccio</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Étape courte pour admirer le granit rouge des Calanches de Piana. Profitez de l'après-midi pour vous baigner à Porticcio.
+                            </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
-                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Ajaccio / Porticcio :</span>
-                                <p class="text-slate-300"><strong>Hôtel Ibis Budget Ajaccio</strong>. Situé en périphérie, très économique avec un grand parking vidéo-surveillé idéal pour rassurer les motards.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Moyen</span>
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛰️ Piana</span>
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Ajaccio :</span>
+                                <p class="text-slate-300"><strong>Hôtel Ibis Budget Ajaccio</strong>. Très fonctionnel avec un grand parking vidéo-surveillé sécurisant pour les deux machines.</p>
                             </div>
                         </div>
 
@@ -228,15 +219,14 @@
                                 <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">MAR 11 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~130 km • (~3h30)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J5 : Ajaccio ➔ Bonifacio</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">Route vers l'extrême sud. Arrêt déjeuner dans la magnifique ville de Sartène, puis découverte des vertigineuses falaises calcaires de Bonifacio.</p>
+                            <h4 class="text-sm font-bold text-white mb-1">J5 : Ajaccio ➔ Sartène ➔ Bonifacio</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Descente vers le Sud. Pause déjeuner à Sartène, "la plus corse des villes corses", puis arrivée sur les falaises calcaires de Bonifacio.
+                            </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
-                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir (Éviter les prix de Bonifacio) :</span>
-                                <p class="text-slate-300"><strong>Hôtel L'Escale</strong> (Sartène/Propriano) ou un petit gîte vers <strong>Figari / Pianottoli</strong>. Beaucoup moins cher et parfait pour le calme.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">⛵ Bonifacio</span>
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir (Pas cher près de Bonifacio) :</span>
+                                <p class="text-slate-300"><strong>Hôtel L'Escale</strong> (Sartène/Propriano) ou de petites chambres d'hôtes vers <strong>Figari / Pianottoli</strong>. Les prix y sont divisés par deux en août par rapport à Bonifacio.</p>
                             </div>
                         </div>
 
@@ -246,51 +236,63 @@
                                 <span class="bg-slate-800 text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded">MER 12 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~180 km • (~5h)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J6 : Bavella ➔ Solenzara ➔ Corte</h4>
-                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">L'étape reine de montagne ! Forêt de l'Ospedale, les mythiques aiguilles de Bavella, puis vous plongez vers Solenzara pour remonter vers Corte.</p>
+                            <h4 class="text-sm font-bold text-white mb-1">J6 : L'Étape de Montagne (Bavella ➔ Corte)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                L'étape reine. Vous grimpez au Col de Bavella au milieu des pins laricio. Attention aux cochons sauvages sur la chaussée. Vous rejoignez ensuite Corte au centre de l'île.
+                            </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
                                 <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Corte :</span>
-                                <p class="text-slate-300"><strong>Hôtel HR</strong> ou <strong>Hôtel Duc de Padoue</strong>. Situés au coeur de la capitale historique, calmes, confortables et abordables en moyenne montagne.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-orange-950/40 text-orange-400 border border-orange-500/10 px-2 py-0.5 rounded">🔥 Virages : Intense</span>
-                                <span class="bg-red-950/40 text-red-400 border border-red-500/10 px-2 py-0.5 rounded">🐷 Cochons sauvages</span>
+                                <p class="text-slate-300"><strong>Hôtel HR</strong> ou <strong>Hôtel Duc de Padoue</strong>. Situés au calme dans la capitale historique, idéaux pour un bon sommeil réparateur.</p>
                             </div>
                         </div>
 
                         <!-- Day 7 -->
                         <div id="day-card-7" onclick="selectDay(7)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
                             <div class="flex justify-between items-start mb-1.5">
-                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">JEU 13 AOÛT</span>
-                                <span class="text-xs text-slate-300 font-bold">~90 km • (~2h)</span>
+                                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded">JEU 13 AOÛT • BONUS</span>
+                                <span class="text-xs text-slate-300 font-bold">~140 km • (~4h)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J7 : Corte ➔ Bastia ➔ Savone (Ferry retour)</h4>
+                            <h4 class="text-sm font-bold text-white mb-1">J7 : Corte ➔ La Castagniccia ➔ Bastia</h4>
                             <p class="text-xs text-slate-400 mb-2 leading-relaxed">
-                                <strong class="text-amber-400">⚠️ Attention horaire ferry !</strong> Départ du port de Bastia à <strong class="text-white">14h30</strong>. Vous devez quitter Corte vers 10h00 pour arriver tranquillement vers 12h00 à Bastia. Embarquement et traversée de 6h30. Arrivée en Italie à Savone à <strong class="text-white">21h00</strong>.
+                                <strong class="text-emerald-400">Votre journée bonus !</strong> Explorez la Castagniccia, une région montagneuse couverte de forêts de châtaigniers, avec des villages perchés et des routes sinueuses fantastiques et très peu touristiques. Dodo près de Bastia.
                             </p>
                             <!-- Sleep suggestion -->
                             <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
-                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir près de Savone (Italie) :</span>
-                                <p class="text-slate-300"><strong>Idea Hotel Plus Savona</strong> ou un petit hôtel/B&B proche de l'autoroute à Savone. <strong class="text-amber-400">Indispensable :</strong> bien dormir pour affronter la très longue journée du lendemain.</p>
-                            </div>
-                            <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-blue-900/30 text-blue-400 border border-blue-500/20 px-2 py-0.5 rounded">🚢 Bastia ➔ Savone (14h30-21h00)</span>
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Bastia :</span>
+                                <p class="text-slate-300"><strong>Sud Hôtel-Restaurant</strong> à Bastia ou un gîte vers <strong>Furiani</strong>. Parfait pour être tout près du port pour le lendemain matin.</p>
                             </div>
                         </div>
 
                         <!-- Day 8 -->
                         <div id="day-card-8" onclick="selectDay(8)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
                             <div class="flex justify-between items-start mb-1.5">
-                                <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded">VEN 14 AOÛT</span>
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] font-bold px-2 py-0.5 rounded">VEN 14 AOÛT</span>
+                                <span class="text-xs text-slate-300 font-bold">~10 km • (Transit)</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-white mb-1">J8 : Bastia ➔ Savone (Ferry retour)</h4>
+                            <p class="text-xs text-slate-400 mb-2 leading-relaxed">
+                                Matinée tranquille à Bastia pour acheter des souvenirs (charcuterie, canistrelli). Arrivée au port à 12h30. Départ du Ferry à <strong class="text-white">14h30</strong>. Traversée de jour (6h30 max). Débarquement à Savone (Italie) à <strong class="text-white">21h00</strong>.
+                            </p>
+                            <!-- Sleep suggestion -->
+                            <div class="mt-2 p-2 bg-slate-950/60 rounded-lg border border-slate-800 text-xs">
+                                <span class="text-orange-400 font-bold block mb-1">🛌 Où dormir à Savone (Italie) :</span>
+                                <p class="text-slate-300"><strong>Idea Hotel Plus Savona</strong> ou <strong>Hôtel Miramare</strong>. Proches de la sortie d'autoroute, idéal pour une grosse nuit de sommeil avant le retour.</p>
+                            </div>
+                        </div>
+
+                        <!-- Day 9 -->
+                        <div id="day-card-9" onclick="selectDay(9)" class="p-3 bg-slate-900 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-800 hover:border-orange-500/50 transition">
+                            <div class="flex justify-between items-start mb-1.5">
+                                <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded">SAM 15 AOÛT</span>
                                 <span class="text-xs text-slate-300 font-bold">~900 km • (~9h30)</span>
                             </div>
-                            <h4 class="text-sm font-bold text-white mb-1">J8 : Savone (Italie) ➔ Angoulême</h4>
+                            <h4 class="text-sm font-bold text-white mb-1">J9 : Le Marathon de Retour (Savone ➔ Angoulême)</h4>
                             <p class="text-xs text-slate-400 mb-2 leading-relaxed">
-                                Le grand marathon retour sur autoroute. Partez tôt après un bon petit-déjeuner. Pensez à faire des pauses régulières pour soulager les poignets sur la CBR650R et le cou sur la Z650.
+                                Longue et intense journée de liaison autoroutière pour rentrer en Charente. Hydratez-vous bien et prévoyez des pauses régulières toutes les 2h.
                             </p>
                             <div class="flex flex-wrap gap-2 text-[10px] mt-2">
-                                <span class="bg-red-950/50 text-red-400 border border-red-500/20 px-2 py-0.5 rounded">⚠️ Très long trajet</span>
+                                <span class="bg-red-950/50 text-red-400 border border-red-500/20 px-2 py-0.5 rounded">⚠️ Très longue journée de route</span>
                                 <span class="bg-slate-800 px-2 py-0.5 rounded text-slate-300">🏡 Retour Charente</span>
                             </div>
                         </div>
@@ -315,8 +317,7 @@
                             </div>
                             <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
                                 <li><strong>Pression pneus :</strong> 2.2 bar (AV) / 2.4 bar (AR) chargé.</li>
-                                <li><strong>Suspension :</strong> Augmenter la précharge de l'amortisseur arrière de 1 ou 2 crans pour éviter le tassement avec les sacoches de selle.</li>
-                                <li><strong>Moteur :</strong> Son bicylindre coupleux est royal pour s'extraire des épingles corses en 2ème et 3ème vitesse.</li>
+                                <li><strong>Suspension :</strong> Augmenter la précharge de l'amortisseur arrière d'un ou deux crans.</li>
                             </ul>
                         </div>
                         
@@ -328,99 +329,242 @@
                             </div>
                             <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4 leading-relaxed">
                                 <li><strong>Pression pneus :</strong> 2.3 bar (AV) / 2.5 bar (AR).</li>
-                                <li><strong>Position de conduite :</strong> Les demi-guidons fatiguent les poignets à basse vitesse. Relâchez bien le haut du corps et serrez le réservoir avec vos genoux.</li>
-                                <li><strong>Moteur :</strong> Le 4 cylindres adore monter en régime, mais en montagne il faudra jouer fréquemment du sélecteur pour rester dans la bonne plage de puissance.</li>
+                                <li><strong>Poignets :</strong> Relâchez le haut du corps sur l'autoroute de liaison (J1 et J9).</li>
                             </ul>
                         </div>
-                    </div>
-
-                    <!-- General motorcycle rules -->
-                    <div class="mt-4 p-3.5 bg-amber-500/10 border border-amber-500/20 rounded-xl">
-                        <h4 class="font-bold text-amber-400 text-xs mb-2 flex items-center gap-1.5">
-                            ⚠️ CONSEILS SPÉCIFIQUES POUR CET ITINÉRAIRE :
-                        </h4>
-                        <ul class="text-xs text-slate-300 space-y-1.5 list-decimal pl-4 leading-relaxed">
-                            <li><strong>J2 en mode "Léger" :</strong> À Île-Rousse, laissez la bagagerie lourde à l'hôtel. Le tour du Cap Corse à moto "à vide" est un plaisir indescriptible, vos machines seront transformées !</li>
-                            <li><strong>J8 - Savone ➔ Angoulême :</strong> 900 km, c'est éprouvant. Échauffez vos poignets, faites une pause obligatoire de 15 minutes toutes les 2h (ou toutes les 150-180 km d'autonomie essence) pour boire de l'eau.</li>
-                            <li><strong>Le ravitaillement :</strong> Les stations sont moins fréquentes dans le maquis central. Faites le plein dès que vous croisez une pompe si vous tombez sous le demi-plein.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
 
             <!-- TAB CONTENT: BUDGET & CHECKLIST -->
             <div id="content-budget" class="hidden flex-col gap-4">
-                <!-- Budget -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
                     <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
                         💰 Budget Estimatif Ajusté (Pour 2 Motos / 2 Personnes)
                     </h3>
                     <div class="space-y-2 text-xs">
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
-                            <span class="text-slate-400">Ferries Aller-Retour (Nice/Île-Rousse & Bastia/Savone)</span>
-                            <span class="font-bold text-emerald-400">~440 € (soit 220€/pers)</span>
+                            <span class="text-slate-400">Ferries Aller-Retour (Nice/Île-Rousse & Bastia/Savone - Sans cabine au retour)</span>
+                            <span class="font-bold text-emerald-400">~440 €</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
-                            <span class="text-slate-400">Essence (approx. 2 700 km cumulés par moto)</span>
-                            <span class="font-bold text-white">~330 € / moto</span>
+                            <span class="text-slate-400">Essence (approx. 2 800 km cumulés par moto)</span>
+                            <span class="font-bold text-white">~350 € / moto</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
-                            <span class="text-slate-400">Hébergement (6 nuits - 5 en Corse + 1 en Italie - hors ferry)</span>
-                            <span class="font-bold text-white">~530 €</span>
+                            <span class="text-slate-400">Hébergement (7 nuits - 6 en Corse + 1 en Italie)</span>
+                            <span class="font-bold text-white">~600 €</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-800">
-                            <span class="text-slate-400">Péages d'autoroute (Angoulême-Nice + Savone-Angoulême)</span>
+                            <span class="text-slate-400">Péages d'autoroutes continentales</span>
                             <span class="font-bold text-white">~110 €</span>
                         </div>
                         <div class="flex justify-between py-2 text-sm font-bold text-orange-400">
                             <span>TOTAL ESTIMÉ (Hors repas)</span>
-                            <span>~1 740 € (soit 870 €/pers)</span>
+                            <span>~1 850 € (soit ~925 €/pers)</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Bag Packing Checklist -->
+                <!-- Bag Packing Checklist Interactive -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
-                    <h3 class="font-bold text-white text-base mb-3 flex items-center gap-2">
-                        🧳 Checklist du Bagage Moto
-                    </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        <div class="space-y-1.5">
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" checked class="accent-orange-500 rounded">
-                                <span>Bombe de graisse de chaîne</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" checked class="accent-orange-500 rounded">
-                                <span>Kit crevaison mèches + cartouches CO2</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" class="accent-orange-500 rounded">
-                                <span>Sangles d'arrimage robustes</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" class="accent-orange-500 rounded">
-                                <span>Double des clés de chaque moto</span>
-                            </label>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-white text-base flex items-center gap-2">
+                            🧳 Checklist Interactive de vos Bagages
+                        </h3>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="mb-5 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="flex justify-between items-center text-xs mb-1.5">
+                            <span class="text-slate-400 font-medium">🎒 Progression de l'emballage :</span>
+                            <span id="pack-progress-text" class="font-bold text-orange-400">0% (0/0)</span>
                         </div>
-                        <div class="space-y-1.5">
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" checked class="accent-orange-500 rounded">
-                                <span>Gants d'été ventilés + gants de pluie</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" class="accent-orange-500 rounded">
-                                <span>Cale plastique pour béquille (asphalte chaud)</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" class="accent-orange-500 rounded">
-                                <span>Gourde ou poche à eau (hydratation)</span>
-                            </label>
-                            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
-                                <input type="checkbox" class="accent-orange-500 rounded">
-                                <span>Maillot de bain pour la pause rafraîchissante</span>
-                            </label>
+                        <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                            <div id="pack-progress-bar" class="bg-gradient-to-r from-orange-600 to-amber-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
                         </div>
+                    </div>
+
+                    <!-- Categories Grid -->
+                    <div class="space-y-4 text-xs">
+                        
+                        <!-- Category 1 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-slate-800/60">
+                            <h4 class="font-bold text-orange-400 text-xs mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+                                🏍️ Équipement Moto & Sécurité (Porté ou Embarqué)
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Casque (visière propre !) + lunettes de soleil</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Blousons ventilés d'été (avec dorsale)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Gants d'été légers + gants de pluie</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Bottes de moto confortables (ou baskets moto)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Tenue de pluie étanche (essentielle pour l'A75)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Bloc-disque robuste + petites chaînes d'attache</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Category 2 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-slate-800/60">
+                            <h4 class="font-bold text-orange-400 text-xs mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+                                👕 Vêtements (Volume Ultra-Réduit pour Z650 / CBR)
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>3 à 4 t-shirts techniques (séchage rapide)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>1 sweat chaud ou polaire (clim ferry & montagnes)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>1 pantalon léger convertible (ou jean de soirée)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>2 shorts / bermudas légers</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>4x sous-vêtements et chaussettes légères</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>1 maillot de bain + serviette microfibre ultra-compacte</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>1 paire de baskets souples (soirée et visites)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Paire de tongs (ferry, plage et douches d'hôtel)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Category 3 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-slate-800/60">
+                            <h4 class="font-bold text-orange-400 text-xs mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+                                🧴 Trousse de Toilette & Premier Secours
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Crème solaire indice 50 (Le soleil corse tape fort !)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Bouchons d'oreilles (autoroute et bruits de moteurs)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Spray anti-moustiques (zones humides de l'intérieur)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Brosse à dents, dentifrice format voyage & gel douche</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Trousse secours : doliprane, désinfectant, pansements ampoules</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Lingettes rafraîchissantes (idéal après une journée de route)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Category 4 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-slate-800/60">
+                            <h4 class="font-bold text-orange-400 text-xs mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+                                📂 Outils, Bagagerie & Électronique indispensable
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Bombe de graisse de chaîne (graisser tous les soirs)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Kit de réparation crevaison mèches + cartouches CO2</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Cale plastique ou plaque en alu pour béquille CBR/Z650</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Sangles Rok Straps robustes pour arrimer les sacs</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Sacs étanches de selle (Roll-bags de 30-40L)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Grands sacs poubelle (doubler l'étanchéité des fringues)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Chiffon microfibre + produit nettoyant visière</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Batterie externe (Powerbank) + câbles de recharge USB</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Category 5 -->
+                        <div class="p-3 bg-slate-850 rounded-xl border border-slate-800/60">
+                            <h4 class="font-bold text-orange-400 text-xs mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
+                                💳 Administratif & Argent (À garder sur soi)
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Permis de conduire + cartes grises + attestation d'assurance</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Billets de ferries (PDF hors-ligne sur téléphone + papier)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Double des clés de chaque moto (gardés dans la poche de l'autre !)</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Cartes d'identité valides + Carte Européenne d'Assurance Maladie</span>
+                                </label>
+                                <label class="flex items-center gap-2.5 cursor-pointer text-slate-300 hover:text-white">
+                                    <input type="checkbox" onchange="updatePackingProgress()" class="pack-item accent-orange-500 rounded h-4 w-4">
+                                    <span>Argent liquide / Espèces (Beaucoup de paillotes corses n'ont pas de TPE !)</span>
+                                </label>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -465,7 +609,7 @@
             box-shadow: 0 0 12px rgba(16, 185, 129, 0.8);
         `;
 
-        // Itineraries Data Coordinates (Ajusté Nice/Île-Rousse & Bastia/Savone)
+        // Itineraries Data Coordinates (Ajusté J1 à J9)
         const routeCoordinates = {
             1: [ // Angoulême to Nice
                 [45.6484, 0.1562], // Angoulême
@@ -473,9 +617,9 @@
                 [43.6108, 3.8767], // Montpellier
                 [43.7013, 7.2681]  // Nice
             ],
-            2: [ // Île-Rousse -> Cap Corse -> St-Florent (Loop)
-                [42.6341, 8.9372], // Île Rousse (Débarquement)
-                [42.6806, 9.3039], // Saint-Florent (Dépôt bagages)
+            2: [ // Île-Rousse -> Cap Corse -> St-Florent
+                [42.6341, 8.9372], // Île Rousse
+                [42.6806, 9.3039], // Saint-Florent
                 [42.7844, 9.3453], // Nonza
                 [42.9649, 9.3512], // Centuri
                 [42.9587, 9.4518], // Macinaggio
@@ -504,7 +648,7 @@
                 [41.4981, 9.0345], // Roccapina
                 [41.3874, 9.1585]  // Bonifacio
             ],
-            6: [ // Bonifacio to Corte (Bavella)
+            6: [ // Bonifacio to Corte
                 [41.3874, 9.1585], // Bonifacio
                 [41.5910, 9.2796], // Porto-Vecchio
                 [41.7497, 9.1706], // Zonza
@@ -512,12 +656,17 @@
                 [41.8569, 9.3986], // Solenzara
                 [42.3056, 9.1508]  // Corte
             ],
-            7: [ // Corte to Bastia
+            7: [ // Corte -> Castagniccia -> Bastia
                 [42.3056, 9.1508], // Corte
-                [42.4635, 9.2062], // Ponte Leccia
+                [42.3736, 9.3486], // Piedicroce (Castagniccia)
+                [42.4419, 9.4231], // Cervione
                 [42.7028, 9.4509]  // Bastia
             ],
-            8: [ // Savone to Angoulême
+            8: [ // Transit Bastia Port
+                [42.7028, 9.4509],
+                [42.7035, 9.4515]
+            ],
+            9: [ // Savone to Angoulême
                 [44.3079, 8.4810], // Savone (Italie)
                 [43.7912, 7.6075], // Vintimille
                 [43.7013, 7.2681], // Nice
@@ -530,7 +679,7 @@
         // Tracés Ferries
         const ferryRoutes = [
             [[43.7013, 7.2681], [42.6341, 8.9372]], // J1 Ferry (Nice -> Île-Rousse)
-            [[42.7028, 9.4509], [44.3079, 8.4810]]  // J7 Ferry (Bastia -> Savone)
+            [[42.7028, 9.4509], [44.3079, 8.4810]]  // J8 Ferry (Bastia -> Savone)
         ];
 
         let polylines = {};
@@ -539,7 +688,6 @@
         let activeDay = 1;
         let ferryVisible = true;
 
-        // Draw ferry routes (dashed blue lines)
         function drawFerry() {
             ferryRoutes.forEach(route => {
                 const fLine = L.polyline(route, {
@@ -552,17 +700,17 @@
             });
         }
 
-        // Draw Itinerary Lines & Stop Markers
         function drawRoutes() {
             const colors = {
-                1: '#475569', // Transit France
-                2: '#f97316', // Corse
+                1: '#475569',
+                2: '#f97316',
                 3: '#f97316',
                 4: '#f97316',
                 5: '#f97316',
                 6: '#f97316',
-                7: '#f97316',
-                8: '#dc2626'  // Marathon retour
+                7: '#10b981', // Étape verte Bonus
+                8: '#f97316',
+                9: '#dc2626'  // Marathon retour rouge
             };
 
             for (let day in routeCoordinates) {
@@ -575,7 +723,6 @@
 
                 polylines[day] = line;
 
-                // Add markers
                 dayCoords.forEach((coord, index) => {
                     let style = markerStyle;
                     let tooltipText = `Étape`;
@@ -583,7 +730,7 @@
                     if (index === 0 && day == 1) {
                         style = startMarkerStyle;
                         tooltipText = `<strong>DÉPART : Angoulême</strong>`;
-                    } else if (index === dayCoords.length - 1 && day == 8) {
+                    } else if (index === dayCoords.length - 1 && day == 9) {
                         style = startMarkerStyle;
                         tooltipText = `<strong>ARRIVÉE : Angoulême</strong>`;
                     } else if (index === 0) {
@@ -606,7 +753,6 @@
             }
         }
 
-        // Setup views & zooms
         function focusMap(area) {
             const btnFrance = document.getElementById('btn-focus-france');
             const btnCorse = document.getElementById('btn-focus-corse');
@@ -638,35 +784,33 @@
             }
         }
 
-        // Select active day
         function selectDay(dayNum) {
             activeDay = dayNum;
             
-            // Highlight list visual class
-            for (let i = 1; i <= 8; i++) {
+            for (let i = 1; i <= 9; i++) {
                 const card = document.getElementById(`day-card-${i}`);
-                if (i === dayNum) {
-                    card.classList.replace('bg-slate-900', 'bg-slate-850');
-                    card.classList.replace('border-slate-800', 'border-orange-500/30');
-                } else {
-                    card.classList.replace('bg-slate-850', 'bg-slate-900');
-                    card.classList.replace('border-orange-500/30', 'border-slate-800');
+                if (card) {
+                    if (i === dayNum) {
+                        card.classList.replace('bg-slate-900', 'bg-slate-850');
+                        card.classList.replace('border-slate-800', 'border-orange-500/30');
+                    } else {
+                        card.classList.replace('bg-slate-850', 'bg-slate-900');
+                        card.classList.replace('border-orange-500/30', 'border-slate-800');
+                    }
                 }
             }
 
-            // Update Polylines weights
             for (let day in polylines) {
                 if (day == dayNum) {
-                    const activeColor = dayNum == 8 ? '#dc2626' : '#f97316';
+                    const activeColor = dayNum == 9 ? '#dc2626' : (dayNum == 7 ? '#10b981' : '#f97316');
                     polylines[day].setStyle({ weight: 6, opacity: 0.9, color: activeColor });
                 } else {
-                    const defaultColor = (day == 1 || day == 8) ? '#475569' : '#e2e8f0';
+                    const defaultColor = (day == 1 || day == 9) ? '#475569' : '#e2e8f0';
                     polylines[day].setStyle({ weight: 3, opacity: 0.3, color: defaultColor });
                 }
             }
 
-            // Camera bounds focus
-            if (dayNum === 1 || dayNum === 8) {
+            if (dayNum === 1 || dayNum === 9) {
                 focusMap('france');
             } else {
                 focusMap('corse');
@@ -674,7 +818,6 @@
             }
         }
 
-        // Tab Switch logic
         function switchTab(tabId) {
             const tabs = ['itinerary', 'moto', 'budget'];
             tabs.forEach(t => {
@@ -692,12 +835,30 @@
             });
         }
 
-        // GPX Downloader (Corrected path configurations)
+        // Checklist Progress Handler
+        function updatePackingProgress() {
+            const checkboxes = document.querySelectorAll('.pack-item');
+            const checked = document.querySelectorAll('.pack-item:checked');
+            const total = checkboxes.length;
+            const count = checked.length;
+            const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+            
+            const progressText = document.getElementById('pack-progress-text');
+            const progressBar = document.getElementById('pack-progress-bar');
+            
+            if (progressText) {
+                progressText.innerHTML = `${percentage}% (${count}/${total} emballés)`;
+            }
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+        }
+
         function downloadGPX(type) {
             let gpxContent = `<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="CorseMotoTrip">\n`;
             
             if (type === 'full') {
-                gpxContent += `  <trk>\n    <name>Corse Road Trip Nice-Savone</name>\n    <trkseg>\n`;
+                gpxContent += `  <trk>\n    <name>Corse Nice-Savone Complet J1-J9</name>\n    <trkseg>\n`;
                 for (let day in routeCoordinates) {
                     routeCoordinates[day].forEach(coord => {
                         gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
@@ -705,20 +866,20 @@
                 }
                 gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
             } else if (type === 'cap') {
-                gpxContent += `  <trk>\n    <name>J2 - Cap Corse boucle depuis Ile-Rousse</name>\n    <trkseg>\n`;
+                gpxContent += `  <trk>\n    <name>J2 - Cap Corse depuis Ile-Rousse</name>\n    <trkseg>\n`;
                 routeCoordinates[2].forEach(coord => {
                     gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
                 });
                 gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
-            } else if (type === 'piana') {
-                gpxContent += `  <trk>\n    <name>J4 - Calanches de Piana</name>\n    <trkseg>\n`;
-                routeCoordinates[4].forEach(coord => {
+            } else if (type === 'castagniccia') {
+                gpxContent += `  <trk>\n    <name>J7 - Boucle de la Castagniccia sauvage</name>\n    <trkseg>\n`;
+                routeCoordinates[7].forEach(coord => {
                     gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
                 });
                 gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
             } else if (type === 'return') {
-                gpxContent += `  <trk>\n    <name>J8 - Savone vers Angouleme</name>\n    <trkseg>\n`;
-                routeCoordinates[8].forEach(coord => {
+                gpxContent += `  <trk>\n    <name>J9 - Savone vers Angouleme</name>\n    <trkseg>\n`;
+                routeCoordinates[9].forEach(coord => {
                     gpxContent += `      <trkpt lat="${coord[0]}" lon="${coord[1]}"></trkpt>\n`;
                 });
                 gpxContent += `    </trkseg>\n  </trk>\n</gpx>`;
@@ -738,7 +899,8 @@
         window.onload = function() {
             drawRoutes();
             drawFerry();
-            selectDay(2); // Focus Day 2 by default
+            selectDay(2); // Focus automatique sur le Cap Corse (Jour 2) au démarrage
+            updatePackingProgress(); // Init progress bar calculations
         };
     </script>
 </body>
